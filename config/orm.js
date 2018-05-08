@@ -19,6 +19,21 @@ var orm = {
             if(e) throw e;
             console.log(r);
         })
+    },
+    // another generic version of select to handle to select all and select specific column
+    select: function(whatToSelect, table){
+        var queryString = "SELECT ?? FROM ??";
+        var data = [whatToSelect, table];
+
+        if(whatToSelect === "*"){
+            queryString = "SELECT * FROM ??";
+            data.splice(0,1);
+        }
+
+        config.query(queryString, data, function(e, r){
+            if(e) throw e;
+            console.log(r);
+        })
     }
 }
 
