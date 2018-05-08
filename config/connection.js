@@ -10,4 +10,4 @@ config.connect(e, r){
     if(e) throw e;
     console.log("Database connection is up and runing");
 }
-module.exports = config;
+module.exports = config;F

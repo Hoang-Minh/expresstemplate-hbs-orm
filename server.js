@@ -4,6 +4,7 @@ var bodyparser = require('body-parser')
 var path = require('path')
 var morgan = require('morgan')
 var expresshbs = require('express-handlebars')
+var config = require("./config/connection");
 
 // new express app
 var app = express()
@@ -18,7 +19,19 @@ app.use(bodyparser.json())
 
 // your code here...
 app.get('/', function (req, res) {
+  config.query(`SELECT * FROM users`, function(e, r){
+    if(e) throw e;
+    res.render("index", {peopel: r}); // is not working since we don't have database yet
+  })
   res.render('index')
+})
+
+app.delete("/users/:id", function(req, res){
+  var id = req.params.id;
+  config.query(`DELETE FROM users WHERE id = ` + id, function(e, r){
+    if(e) throw e;
+    res.send(200);
+  })
 })
 
 var PORT = process.env.PORT || 3000
