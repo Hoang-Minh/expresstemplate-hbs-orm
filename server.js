@@ -19,7 +19,7 @@ app.use(bodyparser.json())
 
 // your code here...
 app.get('/', function (req, res) {
-  config.query(`SELECT * FROM users`, function(e, r){
+  config.query(`SELECT * FROM peeps`, function(e, r){
     if(e) throw e;
     res.render("index", {peopel: r}); // is not working since we don't have database yet
   })
@@ -33,6 +33,10 @@ app.delete("/users/:id", function(req, res){
     res.send(200);
   })
 })
+
+var orm = require("./config/orm");
+orm.selectAll("peeps");
+orm.selectWhere("peeps", "id", 4);
 
 var PORT = process.env.PORT || 3000
 // listening port

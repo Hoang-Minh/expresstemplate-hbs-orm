@@ -3,11 +3,11 @@ var config = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'root',
-  database : 'my_db'
+  database : 'peepsandpets_db'
 });
 
-config.connect(e, r){
+config.connect(function(e, r){
     if(e) throw e;
-    console.log("Database connection is up and runing");
-}
-module.exports = config;F
+    console.log("database is up and running");
+})
+module.exports = config;
