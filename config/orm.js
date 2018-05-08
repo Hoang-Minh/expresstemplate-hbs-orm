@@ -37,6 +37,12 @@ var orm = {
             //return r;
             cb(r);
         })
+    },
+    delete: function(table, columnName, value, cb){        
+        config.query(`DELETE FROM ?? WHERE ?? = ?`, [table, columnName, value], function(e, r){
+            if(e) throw e;
+            cb(r);
+        })
     }
 }
 

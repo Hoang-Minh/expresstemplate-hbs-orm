@@ -45,6 +45,10 @@ orm.select("*", "peeps", function(r){
   console.log(r);
 });
 
+orm.delete("peeps", "id", 1, function(r){
+  console.log(r);
+})
+
 var PORT = process.env.PORT || 3000
 // listening port
 app.listen(PORT, function (e) {
