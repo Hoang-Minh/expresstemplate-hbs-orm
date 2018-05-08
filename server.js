@@ -35,9 +35,15 @@ app.delete("/users/:id", function(req, res){
 })
 
 var orm = require("./config/orm");
-orm.selectAll("peeps");
-orm.selectWhere("peeps", "id", 4);
-orm.select("*", "peeps");
+orm.selectAll("peeps", function(r){
+  console.log(r);
+});
+orm.selectWhere("peeps", "id", 4, function(r){
+  console.log(r);
+});
+orm.select("*", "peeps", function(r){
+  console.log(r);
+});
 
 var PORT = process.env.PORT || 3000
 // listening port

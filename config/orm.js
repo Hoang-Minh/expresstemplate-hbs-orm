@@ -8,20 +8,22 @@ var config = require("./connection");
 // https://en.wikipedia.org/wiki/SQL_injection
 
 var orm = {
-    selectAll: function(table){
+    selectAll: function(table, cb){
         config.query(`SELECT * FROM ??`, [table], function(e, r){
             if(e) throw e;
-            console.log(r);
+            //return r;
+            cb(r);
         })
     },
-    selectWhere: function(table, column, value){
+    selectWhere: function(table, column, value, cb){
         config.query(`SELECT * FROM ?? WHERE ?? = ?`, [table, column, value], function(e, r){
             if(e) throw e;
-            console.log(r);
+            //return r;
+            cb(r);
         })
     },
     // another generic version of select to handle to select all and select specific column
-    select: function(whatToSelect, table){
+    select: function(whatToSelect, table, cb){
         var queryString = "SELECT ?? FROM ??";
         var data = [whatToSelect, table];
 
@@ -32,7 +34,8 @@ var orm = {
 
         config.query(queryString, data, function(e, r){
             if(e) throw e;
-            console.log(r);
+            //return r;
+            cb(r);
         })
     }
 }
